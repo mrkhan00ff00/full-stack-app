@@ -211,7 +211,7 @@ const ProductDetail = () => {
 
     // Fetch product
     setLoading(true);
-    fetch("/api/products")
+    fetch(`${import.meta.env.VITE_API_URL}/api/products`)
       .then(res => res.json())
       .then(data => {
         // Handle synthetic IDs from padding (e.g., product-1_syn_35 -> product-1)
@@ -1139,7 +1139,7 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("/api/products")
+    fetch(`${import.meta.env.VITE_API_URL}/api/products`)
       .then(res => res.json())
       .then(data => {
         // ... distributive logic ...
@@ -1266,7 +1266,7 @@ const ProductList = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("/api/products")
+    fetch(`${import.meta.env.VITE_API_URL}/api/products`)
       .then(res => res.json())
       .then(data => {
         let baseData = data.map((p: any) => ({
@@ -1577,7 +1577,7 @@ const AdminPanel = () => {
 
   const fetchProducts = () => {
     setLoading(true);
-    fetch("/api/products")
+    fetch(`${import.meta.env.VITE_API_URL}/api/products`)
       .then(res => res.json())
       .then(data => {
         setProducts(data);
@@ -1589,7 +1589,7 @@ const AdminPanel = () => {
   const handleDelete = async (id: string) => {
     if (confirm("Are you sure you want to delete this machine?")) {
       setIsSubmitting(true);
-      await fetch(`/api/products/${id}`, { method: "DELETE" });
+      await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`, { method: "DELETE" });
       fetchProducts();
       setIsSubmitting(false);
     }
@@ -1598,7 +1598,7 @@ const AdminPanel = () => {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const url = editingProduct ? `/api/products/${editingProduct._id}` : "/api/products";
+    const url = editingProduct ? `${import.meta.env.VITE_API_URL}/api/products/${editingProduct._id}` : `${import.meta.env.VITE_API_URL}/api/products`;
     const method = editingProduct ? "PUT" : "POST";
     const body = editingProduct ? editingProduct : newProduct;
 
