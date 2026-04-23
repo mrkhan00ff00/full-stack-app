@@ -228,7 +228,7 @@ const ProductDetail = () => {
                 name: "Eon-Ultra X1",
                 price: 2499,
                 category: "Featured",
-                image: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?q=80&w=2574&auto=format&fit=crop",
+                image: "/images/laptop-1.png",
                 description: "The Eon-Ultra X1 represents the pinnacle of mobile computing. Featuring a stunning 4K OLED display and the raw power of the RTX 5080, it's built for those who refuse to compromise.",
                 rating: "4.9"
             };
@@ -679,7 +679,7 @@ const CartDrawer = () => {
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                           const img = e.currentTarget;
-                          img.src = "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?q=80&w=2070&auto=format&fit=crop";
+                          img.src = "/images/laptop-1.png";
                         }}
                         className="w-full h-full object-cover" 
                       />
@@ -893,7 +893,7 @@ const WarrantyPromoBanner = () => {
                whileInView={{ x: 0, opacity: 1 }}
                className="w-20 md:w-[250px] bg-white/5 backdrop-blur-xl rounded-xl md:rounded-[40px] border md:border-4 border-white/20 p-1 md:p-4 rotate-12 shadow-xl"
              >
-                <img src="https://picsum.photos/seed/techman/600/600" alt="Verified" className="rounded-lg md:rounded-[30px] opacity-80" referrerPolicy="no-referrer" />
+                <img src="/images/laptop-2.png" alt="Verified" className="rounded-lg md:rounded-[30px] opacity-80" referrerPolicy="no-referrer" />
              </motion.div>
              <motion.div 
                initial={{ x: 200, opacity: 0 }}
@@ -901,7 +901,7 @@ const WarrantyPromoBanner = () => {
                transition={{ delay: 0.2 }}
                className="w-20 md:w-[250px] bg-white/10 backdrop-blur-2xl rounded-xl md:rounded-[40px] border md:border-4 border-white/30 p-1 md:p-4 -rotate-6 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)]"
              >
-                <img src="https://picsum.photos/seed/phonepro/600/600" alt="Certified" className="rounded-lg md:rounded-[20px]" referrerPolicy="no-referrer" />
+                <img src="/images/laptop-3.png" alt="Certified" className="rounded-lg md:rounded-[20px]" referrerPolicy="no-referrer" />
              </motion.div>
           </div>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[160%] bg-[#7e22ce]/20 blur-[100px] rounded-full animate-pulse" />
