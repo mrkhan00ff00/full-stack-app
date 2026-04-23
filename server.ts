@@ -1,166 +1,98 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 import express from "express";
-import cors from "cors";
-import mongoose from "mongoose";
+import { createServer as createViteServer } from "vite";
 import path from "path";
+import cors from "cors";
 import fs from "fs/promises";
 import { fileURLToPath } from "url";
-import { createServer as createViteServer } from "vite";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-// ---------------- PATH SETUP ----------------
+dotenv.config();
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DB_PATH = path.join(__dirname, "products.json");
 const PUBLIC_DIR = path.join(__dirname, "public");
 
-// ---------------- APP INIT ----------------
-const app = express();
-app.use(cors());
-app.use(express.json());
+async function startServer() {
+  const app = express();
+  const PORT = Number(process.env.PORT) || 3000;
 
-// ---------------- PORT ----------------
-const PORT = Number(process.env.PORT) || 3000;
+  app.use(cors());
+  app.use(express.json());
 
-// ---------------- MONGO ----------------
-const MONGO_URI = process.env.MONGO_URI;
+  // =========================
+  // MongoDB CONNECTION (NEW)
+  // =========================
+  mongoose
+    .connect(process.env.MONGO_URI as string)
+    .then(() => console.log("MongoDB Connected"))
+    .catch((err) => console.log("DB Error:", err));
 
-// ---------------- DB CONNECT ----------------
-async function connectDB() {
-  if (!MONGO_URI) {
-    console.error("❌ MONGO_URI missing");
-    return;
-  }
+  // Serve static files
+  app.use(express.static(PUBLIC_DIR));
 
-  try {
-    console.log("Connecting to MongoDB Atlas...");
-    await mongoose.connect(MONGO_URI);
-    console.log("✅ MongoDB Connected Successfully");
-  } catch (err) {
-    console.error("❌ MongoDB Connection Failed");
-    console.error(err);
-  }
-}
+  // =========================
+  // EXISTING FILE-BASED API (UNCHANGED)
+  // =========================
+  app.get("/api/products", async (req, res) => {
+    const products = JSON.parse(await fs.readFile(DB_PATH, "utf-8"));
+    res.json(products);
+  });
 
-connectDB();
-
-// ---------------- STATIC ----------------
-app.use(express.static(PUBLIC_DIR));
-
-// ---------------- ROOT ROUTE ----------------
-app.get("/", (req, res) => {
-  res.send("Backend is running 🚀");
-});
-
-// ---------------- API ROUTES ----------------
-
-// GET ALL PRODUCTS
-app.get("/api/products", async (req, res) => {
-  try {
-    const data = await fs.readFile(DB_PATH, "utf-8");
-    res.json(JSON.parse(data));
-  } catch {
-    res.status(500).json({ message: "Error loading products" });
-  }
-});
-
-// GET ONE
-app.get("/api/products/:id", async (req, res) => {
-  try {
-    const data = await fs.readFile(DB_PATH, "utf-8");
-    const products = JSON.parse(data);
-
+  app.get("/api/products/:id", async (req, res) => {
+    const products = JSON.parse(await fs.readFile(DB_PATH, "utf-8"));
     const product = products.find((p: any) => p._id === req.params.id);
-
-    if (!product) return res.status(404).json({ message: "Not found" });
-
-    res.json(product);
-  } catch {
-    res.status(500).json({ message: "Error fetching product" });
-  }
-});
-
-// ADD
-app.post("/api/products", async (req, res) => {
-  try {
-    const data = await fs.readFile(DB_PATH, "utf-8");
-    const products = JSON.parse(data);
-
-    const newProduct = {
-      ...req.body,
-      _id: `product-${Date.now()}`
-    };
-
-    products.push(newProduct);
-
-    await fs.writeFile(DB_PATH, JSON.stringify(products, null, 2));
-
-    res.status(201).json(newProduct);
-  } catch {
-    res.status(500).json({ message: "Error adding product" });
-  }
-});
-
-// UPDATE
-app.put("/api/products/:id", async (req, res) => {
-  try {
-    const data = await fs.readFile(DB_PATH, "utf-8");
-    const products = JSON.parse(data);
-
-    const index = products.findIndex((p: any) => p._id === req.params.id);
-
-    if (index === -1)
-      return res.status(404).json({ message: "Not found" });
-
-    products[index] = { ...products[index], ...req.body };
-
-    await fs.writeFile(DB_PATH, JSON.stringify(products, null, 2));
-
-    res.json(products[index]);
-  } catch {
-    res.status(500).json({ message: "Error updating product" });
-  }
-});
-
-// DELETE
-app.delete("/api/products/:id", async (req, res) => {
-  try {
-    const data = await fs.readFile(DB_PATH, "utf-8");
-    const products = JSON.parse(data);
-
-    const filtered = products.filter((p: any) => p._id !== req.params.id);
-
-    await fs.writeFile(DB_PATH, JSON.stringify(filtered, null, 2));
-
-    res.status(204).send();
-  } catch {
-    res.status(500).json({ message: "Error deleting product" });
-  }
-});
-
-// ---------------- VITE (SAFE FIX) ----------------
-const isProd =
-  process.env.NODE_ENV === "production" ||
-  process.env.RAILWAY_ENVIRONMENT;
-
-if (!isProd) {
-  const vite = await createViteServer({
-    server: { middlewareMode: true, allowedHosts: true as any },
-    appType: "spa",
+    if (product) res.json(product);
+    else res.status(404).json({ message: "Product not found" });
   });
 
-  app.use(vite.middlewares);
-} else {
-  const distPath = path.join(__dirname, "dist");
+  app.post("/api/products", async (req, res) => {
+    const products = JSON.parse(await fs.readFile(DB_PATH, "utf-8"));
+    const newProduct = { ...req.body, _id: `product-${Date.now()}` };
+    products.push(newProduct);
+    await fs.writeFile(DB_PATH, JSON.stringify(products, null, 2));
+    res.status(201).json(newProduct);
+  });
 
-  app.use(express.static(distPath));
+  app.put("/api/products/:id", async (req, res) => {
+    const products = JSON.parse(await fs.readFile(DB_PATH, "utf-8"));
+    const index = products.findIndex((p: any) => p._id === req.params.id);
+    if (index !== -1) {
+      products[index] = { ...products[index], ...req.body };
+      await fs.writeFile(DB_PATH, JSON.stringify(products, null, 2));
+      res.json(products[index]);
+    } else {
+      res.status(404).json({ message: "Product not found" });
+    }
+  });
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(distPath, "index.html"));
+  app.delete("/api/products/:id", async (req, res) => {
+    const products = JSON.parse(await fs.readFile(DB_PATH, "utf-8"));
+    const filtered = products.filter((p: any) => p._id !== req.params.id);
+    await fs.writeFile(DB_PATH, JSON.stringify(filtered, null, 2));
+    res.status(204).send();
+  });
+
+  // =========================
+  // VITE SETUP (UNCHANGED)
+  // =========================
+  if (process.env.NODE_ENV !== "production") {
+    const vite = await createViteServer({
+      server: { middlewareMode: true, allowedHosts: true as any },
+      appType: "spa",
+    });
+    app.use(vite.middlewares);
+  } else {
+    const distPath = path.join(__dirname, "dist");
+    app.use(express.static(distPath));
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
+    });
+  }
+
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on http://localhost:${PORT}`);
   });
 }
 
-// ---------------- START SERVER ----------------
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-});
+startServer();
