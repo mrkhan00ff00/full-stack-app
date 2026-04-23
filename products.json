@@ -1,0 +1,290 @@
+[
+  {
+    "_id": "product-1",
+    "name": "Eon-Ultra X 1",
+    "price": 2317,
+    "category": "Gaming",
+    "image": "/images/laptop-1.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.6"
+  },
+  {
+    "_id": "product-2",
+    "name": "Stealth Pro 1",
+    "price": 1214,
+    "category": "Business",
+    "image": "/images/laptop-2.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.4"
+  },
+  {
+    "_id": "product-3",
+    "name": "Luminary Titan 1",
+    "price": 1892,
+    "category": "Creator",
+    "image": "/images/laptop-3.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.1"
+  },
+  {
+    "_id": "product-4",
+    "name": "Prism Studio 1",
+    "price": 1604,
+    "category": "Gaming",
+    "image": "/images/laptop-4.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "5.0"
+  },
+  {
+    "_id": "product-5",
+    "name": "Nebula Razer 1",
+    "price": 1900,
+    "category": "Business",
+    "image": "/images/laptop-5.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.7"
+  },
+  {
+    "_id": "product-6",
+    "name": "Zenith Book 1",
+    "price": 2585,
+    "category": "Creator",
+    "image": "/images/laptop-6.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.6"
+  },
+  {
+    "_id": "product-7",
+    "name": "Apex Mercury 1",
+    "price": 2329,
+    "category": "Gaming",
+    "image": "/images/laptop-7.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.9"
+  },
+  {
+    "_id": "product-8",
+    "name": "Vortex 17 1",
+    "price": 877,
+    "category": "Business",
+    "image": "/images/laptop-8.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.9"
+  },
+  {
+    "_id": "product-9",
+    "name": "Quantum Core 1",
+    "price": 1033,
+    "category": "Creator",
+    "image": "/images/laptop-9.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.2"
+  },
+  {
+    "_id": "product-10",
+    "name": "Shadow Edge 1",
+    "price": 1783,
+    "category": "Gaming",
+    "image": "/images/laptop-10.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.7"
+  },
+  {
+    "_id": "product-11",
+    "name": "Eon-Ultra X 2",
+    "price": 2090,
+    "category": "Business",
+    "image": "/images/laptop-1.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.8"
+  },
+  {
+    "_id": "product-12",
+    "name": "Stealth Pro 2",
+    "price": 1641,
+    "category": "Creator",
+    "image": "/images/laptop-2.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.3"
+  },
+  {
+    "_id": "product-13",
+    "name": "Luminary Titan 2",
+    "price": 1936,
+    "category": "Gaming",
+    "image": "/images/laptop-3.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.1"
+  },
+  {
+    "_id": "product-14",
+    "name": "Prism Studio 2",
+    "price": 2004,
+    "category": "Business",
+    "image": "/images/laptop-4.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.9"
+  },
+  {
+    "_id": "product-15",
+    "name": "Nebula Razer 2",
+    "price": 1645,
+    "category": "Creator",
+    "image": "/images/laptop-5.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.6"
+  },
+  {
+    "_id": "product-16",
+    "name": "Zenith Book 2",
+    "price": 1449,
+    "category": "Gaming",
+    "image": "/images/laptop-6.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.0"
+  },
+  {
+    "_id": "product-17",
+    "name": "Apex Mercury 2",
+    "price": 1706,
+    "category": "Business",
+    "image": "/images/laptop-7.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.4"
+  },
+  {
+    "_id": "product-18",
+    "name": "Vortex 17 2",
+    "price": 2020,
+    "category": "Creator",
+    "image": "/images/laptop-8.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "5.0"
+  },
+  {
+    "_id": "product-19",
+    "name": "Quantum Core 2",
+    "price": 904,
+    "category": "Gaming",
+    "image": "/images/laptop-9.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.8"
+  },
+  {
+    "_id": "product-20",
+    "name": "Shadow Edge 2",
+    "price": 2597,
+    "category": "Business",
+    "image": "/images/laptop-10.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.5"
+  },
+  {
+    "_id": "product-21",
+    "name": "Eon-Ultra X 3",
+    "price": 1609,
+    "category": "Creator",
+    "image": "/images/laptop-1.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.1"
+  },
+  {
+    "_id": "product-22",
+    "name": "Stealth Pro 3",
+    "price": 2548,
+    "category": "Gaming",
+    "image": "/images/laptop-2.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.6"
+  },
+  {
+    "_id": "product-23",
+    "name": "Luminary Titan 3",
+    "price": 1187,
+    "category": "Business",
+    "image": "/images/laptop-3.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.6"
+  },
+  {
+    "_id": "product-24",
+    "name": "Prism Studio 3",
+    "price": 2572,
+    "category": "Creator",
+    "image": "/images/laptop-4.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.1"
+  },
+  {
+    "_id": "product-25",
+    "name": "Nebula Razer 3",
+    "price": 2473,
+    "category": "Gaming",
+    "image": "/images/laptop-5.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.5"
+  },
+  {
+    "_id": "product-26",
+    "name": "Zenith Book 3",
+    "price": 1151,
+    "category": "Business",
+    "image": "/images/laptop-6.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.2"
+  },
+  {
+    "_id": "product-27",
+    "name": "Apex Mercury 3",
+    "price": 1607,
+    "category": "Creator",
+    "image": "/images/laptop-7.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.6"
+  },
+  {
+    "_id": "product-28",
+    "name": "Vortex 17 3",
+    "price": 1228,
+    "category": "Gaming",
+    "image": "/images/laptop-8.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.5"
+  },
+  {
+    "_id": "product-29",
+    "name": "Quantum Core 3",
+    "price": 2689,
+    "category": "Business",
+    "image": "/images/laptop-9.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.6"
+  },
+  {
+    "_id": "product-30",
+    "name": "Shadow Edge 3",
+    "price": 2338,
+    "category": "Creator",
+    "image": "/images/laptop-10.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.0"
+  },
+  {
+    "_id": "product-31",
+    "name": "Eon-Ultra X 4",
+    "price": 2317,
+    "category": "Gaming",
+    "image": "/images/laptop-1.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "3.2"
+  },
+  {
+    "_id": "product-32",
+    "name": "Stealth Pro 4",
+    "price": 864,
+    "category": "Business",
+    "image": "/images/laptop-2.png",
+    "description": "High-performance machine engineered for power users. Features 4K OLED display and next-gen processing.",
+    "rating": "4.9"
+  }
+]
