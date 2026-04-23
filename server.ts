@@ -19,38 +19,38 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ---------------- FIXED PORT (IMPORTANT) ----------------
-const PORT: number = Number(process.env.PORT) || 3000;
+// ---------------- PORT ----------------
+const PORT = Number(process.env.PORT) || 3000;
 
-// ---------------- MONGO URI ----------------
+// ---------------- MONGO ----------------
 const MONGO_URI = process.env.MONGO_URI;
 
 // ---------------- DB CONNECT ----------------
 async function connectDB() {
   if (!MONGO_URI) {
-    console.error("❌ MONGO_URI missing in .env");
+    console.error("❌ MONGO_URI missing");
     return;
   }
 
   try {
     console.log("Connecting to MongoDB Atlas...");
-
-    await mongoose.connect(MONGO_URI, {
-      serverSelectionTimeoutMS: 5000,
-    });
-
+    await mongoose.connect(MONGO_URI);
     console.log("✅ MongoDB Connected Successfully");
   } catch (err) {
     console.error("❌ MongoDB Connection Failed");
     console.error(err);
-    console.log("⚠️ Server will still run without DB");
   }
 }
 
 connectDB();
 
-// ---------------- STATIC FILES ----------------
+// ---------------- STATIC ----------------
 app.use(express.static(PUBLIC_DIR));
+
+// ---------------- ROOT ROUTE ----------------
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
+});
 
 // ---------------- API ROUTES ----------------
 
@@ -64,7 +64,7 @@ app.get("/api/products", async (req, res) => {
   }
 });
 
-// GET SINGLE PRODUCT
+// GET ONE
 app.get("/api/products/:id", async (req, res) => {
   try {
     const data = await fs.readFile(DB_PATH, "utf-8");
@@ -72,9 +72,7 @@ app.get("/api/products/:id", async (req, res) => {
 
     const product = products.find((p: any) => p._id === req.params.id);
 
-    if (!product) {
-      return res.status(404).json({ message: "Product not found" });
-    }
+    if (!product) return res.status(404).json({ message: "Not found" });
 
     res.json(product);
   } catch {
@@ -82,7 +80,7 @@ app.get("/api/products/:id", async (req, res) => {
   }
 });
 
-// ADD PRODUCT
+// ADD
 app.post("/api/products", async (req, res) => {
   try {
     const data = await fs.readFile(DB_PATH, "utf-8");
@@ -103,7 +101,7 @@ app.post("/api/products", async (req, res) => {
   }
 });
 
-// UPDATE PRODUCT
+// UPDATE
 app.put("/api/products/:id", async (req, res) => {
   try {
     const data = await fs.readFile(DB_PATH, "utf-8");
@@ -111,9 +109,8 @@ app.put("/api/products/:id", async (req, res) => {
 
     const index = products.findIndex((p: any) => p._id === req.params.id);
 
-    if (index === -1) {
-      return res.status(404).json({ message: "Product not found" });
-    }
+    if (index === -1)
+      return res.status(404).json({ message: "Not found" });
 
     products[index] = { ...products[index], ...req.body };
 
@@ -125,7 +122,7 @@ app.put("/api/products/:id", async (req, res) => {
   }
 });
 
-// DELETE PRODUCT
+// DELETE
 app.delete("/api/products/:id", async (req, res) => {
   try {
     const data = await fs.readFile(DB_PATH, "utf-8");
@@ -141,8 +138,10 @@ app.delete("/api/products/:id", async (req, res) => {
   }
 });
 
-// ---------------- VITE SETUP ----------------
-const isProd = process.env.NODE_ENV === "production";
+// ---------------- VITE (SAFE FIX) ----------------
+const isProd =
+  process.env.NODE_ENV === "production" ||
+  process.env.RAILWAY_ENVIRONMENT;
 
 if (!isProd) {
   const vite = await createViteServer({
@@ -163,5 +162,5 @@ if (!isProd) {
 
 // ---------------- START SERVER ----------------
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
